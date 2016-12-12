@@ -32,7 +32,7 @@ const std::string methinks("methinks it is like a weasel");
 /// @brief Program modes.
 /// @note Uncomment the one you want used, comment all the others.
 /// @todo These should be strongly-typed `enum`s used together with a
-//   "static if" mechanism, such as `if constexpr`.
+///  "static if" mechanism, such as `if constexpr` in C++17.
 ///
 #define MODE_WEASEL
 //#define MODE_PALINDROME
@@ -150,7 +150,7 @@ try
     // the current Candidates Generation
     std::vector<std::string> cagen(num_cagen, candidate);
 
-    // Value passed to `std::setw()` to pretify printing
+    // Value passed to `std::setw()` to prettify printing
     constexpr std::size_t val_setw(10);
 
     std::cout << std::setw(val_setw) << "FIRST: " << candidate << '\n';
