@@ -119,7 +119,7 @@ try
         std::chrono::system_clock::now().time_since_epoch().count());
 
     // Random Character
-    std::uniform_int_distribution<std::string::size_type> rand_char(
+    std::uniform_int_distribution<char> rand_char(
         std::numeric_limits<char>::min(),
         std::numeric_limits<char>::max());
 
