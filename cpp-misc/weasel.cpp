@@ -143,7 +143,6 @@ try
             return c;
         };
 
-
     std::string candidate(calen, char(0)); // Candidate string
 
     std::generate(candidate.begin(), candidate.end(), gen_print_char);
