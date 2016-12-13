@@ -1,5 +1,7 @@
 //
-// http://en.cppreference.com/w/cpp/language/function-try-block
+// Function-try-block, C++98.
+//
+//  http://en.cppreference.com/w/cpp/language/function-try-block
 //
 
 #include <iostream>
