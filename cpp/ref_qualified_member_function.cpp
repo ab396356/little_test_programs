@@ -8,6 +8,9 @@
 #include <iostream>
 #include <utility>
 
+namespace
+{
+
 class ghost_busters
 {
 public:
@@ -22,6 +25,8 @@ public:
         std::clog << "GHOST BUSTERS!" << std::endl;
     }
 };
+
+} // unnamed namespace
 
 int main()
 {
