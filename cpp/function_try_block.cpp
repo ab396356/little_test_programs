@@ -16,7 +16,7 @@ public:
 
     throws_exception()
     {
-        std::clog << __func__ << ": I am throwing!\n";
+        std::clog << __func__ << ": I am throwing!" << std::endl;
         throw std::logic_error("evil code!");
     }
 };
@@ -30,11 +30,11 @@ public:
     {
         try
         {
-            std::clog << __func__ << ": I'm trying!\n";
+            std::clog << __func__ << ": I'm trying!" << std::endl;
         }
         catch (const std::logic_error &e)
         {
-            std::clog << __func__ << ": I caught: " << e.what() << '\n';
+            std::clog << __func__ << ": I caught: " << e.what() << std::endl;
         }
     }
 };
@@ -46,11 +46,11 @@ public:
     catches_exception() try:
         throws_exception()
     {
-        std::clog << __func__ << ": I'm trying!\n";
+        std::clog << __func__ << ": I'm trying!" << std::endl;
     }
     catch (const std::logic_error &e)
     {
-        std::clog << __func__ << ": I caught: " << e.what() << '\n';
+        std::clog << __func__ << ": I caught: " << e.what() << std::endl;
     }
 };
 
@@ -64,5 +64,5 @@ try
 }
 catch (const std::logic_error &e)
 {
-    std::clog << __func__ << ": I caught: " << e.what() << '\n';
+    std::clog << __func__ << ": I caught: " << e.what() << std::endl;
 }
