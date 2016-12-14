@@ -33,6 +33,11 @@ bool operator == (const number &, const number &)
 
 int main()
 {
+    number n1, n2;
+
+    n1.operator != (n2);    // same as `n1 != n2;`
+    operator == (n1, n2);   // same as `n1 == n2;`
+
     // first calls the non-member overload:
     //
     //  std::operator << (ostream &, const char *)
@@ -50,9 +55,4 @@ int main()
     //  std::ostream::operator << (const void *)
     //
     std::clog.operator << ("hello?").operator << (std::endl);
-
-    number n1, n2;
-
-    n1.operator != (n2);    // same as `n1 != n2;`
-    operator == (n1, n2);   // same as `n1 == n2;`
 }
