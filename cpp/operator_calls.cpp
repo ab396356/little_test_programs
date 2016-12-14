@@ -48,11 +48,12 @@ int main()
     // starting `std::` unnecessary thanks to Argument-Dependent Lookup (ADL)
     std::operator << (std::clog, '\n');
 
-    // this will compile OK, but will treat the argument as a pointer
-    // and print the address of the string literal, not its contents,
-    // because it first calls the member overload:
+    // first calls the member overload:
     //
     //  std::ostream::operator << (const void *)
+    //
+    // which will treat the string as a pointer and proceed to print
+    // a memory address
     //
     std::clog.operator << ("hello?").operator << (std::endl);
 }
