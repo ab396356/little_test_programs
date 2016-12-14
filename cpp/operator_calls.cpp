@@ -19,11 +19,6 @@ public:
     // defined as member function
     bool operator != (const number &) const
     {
-        // first calls the non-member overload:
-        //
-        //  std::operator << (ostream &, const char *)
-        //
-        operator << (std::clog, __func__).operator << (std::endl);
         return true;
     }
 };
@@ -31,8 +26,6 @@ public:
 // defined as non-member function
 bool operator == (const number &, const number &)
 {
-    // starting `std::` unnecessary thanks to Argument-Dependent Lookup (ADL)
-    std::operator << (std::clog, __func__).operator << (std::endl);
     return true;
 }
 
@@ -40,9 +33,15 @@ bool operator == (const number &, const number &)
 
 int main()
 {
+    // first calls the non-member overload:
+    //
+    //  std::operator << (ostream &, const char *)
+    //
     operator << (std::clog, "needlessly verbose\n");
     operator << (std::clog, "an int: ").operator << (130);
-    operator << (std::clog, '\n');
+
+    // starting `std::` unnecessary thanks to Argument-Dependent Lookup (ADL)
+    std::operator << (std::clog, '\n');
 
     // this will compile OK, but will treat the argument as a pointer
     // and print the address of the string literal, not its contents,
@@ -54,6 +53,6 @@ int main()
 
     number n1, n2;
 
-    n1.operator != (n2);
-    operator == (n1, n2);
+    n1.operator != (n2);    // same as `n1 != n2;`
+    operator == (n1, n2);   // same as `n1 == n2;`
 }
