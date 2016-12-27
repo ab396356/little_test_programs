@@ -3,6 +3,7 @@
 //
 //  https://en.wikipedia.org/wiki/X_Macro
 //  http://www.drdobbs.com/the-new-c-x-macros/184401387
+//  http://www.drdobbs.com/cpp/the-x-macro/228700289
 //
 
 #include <stdio.h>
