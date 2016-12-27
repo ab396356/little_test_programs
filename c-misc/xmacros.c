@@ -30,9 +30,11 @@ int main(void)
     //
     //  if (n == (100)) {
     //      printf("color: %s\n", ("red"));
-    //  } else if (n == (-23)) {
+    //  } else
+    //  if (n == (-23)) {
     //      printf("color: %s\n", ("green"));
-    //  } else if (n == (55)) {
+    //  } else
+    //  if (n == (55)) {
     //      printf("color: %s\n", ("blue"));
     //  } else {}
     //
