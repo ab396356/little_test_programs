@@ -21,7 +21,9 @@ int main(void)
         printf("color: %s\n", (Color));                                        \
     } else
 
-    COLORS_AND_NUMBERS {}
+    COLORS_AND_NUMBERS {
+        printf("unknown color\n");
+    }
 
 #undef X
 
@@ -36,6 +38,8 @@ int main(void)
     //  } else
     //  if (n == (55)) {
     //      printf("color: %s\n", ("blue"));
-    //  } else {}
+    //  } else {
+    //      printf("unknown color\n");
+    //  }
     //
 }
