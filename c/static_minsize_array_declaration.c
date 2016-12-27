@@ -6,6 +6,10 @@
 //  http://c-faq.com/aryptr/aryparmsize.html
 //
 
+#include <assert.h>
+#include <stddef.h>
+#include <stdlib.h>
+
 //
 // the keyword `static`, as used inside the array declaration below, has
 // the meaning of:
@@ -38,4 +42,15 @@ static void func_fail(int arr[10])
 
 int main(void)
 {
+    int *arr = malloc(3 * sizeof (int));
+
+    assert(arr != NULL);
+    //func_ok(arr);     // Undefined Behavior
+    //func_fail(arr);   // Undefined Behavior
+
+    arr = realloc(arr, 10 * sizeof (int));
+    assert(arr != NULL);
+    func_ok(arr);       // OK
+    func_fail(arr);     // OK
+    free(arr);
 }
