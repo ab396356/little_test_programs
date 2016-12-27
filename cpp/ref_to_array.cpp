@@ -44,6 +44,7 @@ int main()
 
     pass_array_ref(a);
     //pass_array_ref(ra);   // OK but unnecessary
+    //pass_array_ref(cra);  // compilation error
     //pass_array_ref(ra2);  // compilation error
 
     std::cout << "after calling `pass_array_ref()`:\n";
