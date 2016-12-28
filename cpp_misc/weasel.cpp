@@ -3,6 +3,15 @@
 //
 //  https://en.wikipedia.org/wiki/Weasel_program
 //
+// The Weasel program is a thought experiment and a very rough simulation of
+// evolution and natural selection, by starting with a random string of letters
+// and gradually mutating them into the text "methinks it is like a weasel".
+// The program can be easily modified to generate text that satisfies other
+// criteria, e.g. being a palindrome, thus not choosing one particular output.
+//
+// The starting text is random and is mutated randomly (evolution) and it is
+// then scored for suitability (natural selection).
+//
 
 #include <algorithm>
 #include <chrono>
