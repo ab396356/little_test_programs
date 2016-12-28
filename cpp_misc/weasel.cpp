@@ -4,7 +4,7 @@
 //  https://en.wikipedia.org/wiki/Weasel_program
 //
 // The Weasel program is a thought experiment and a very rough simulation of
-// evolution, by starting with a random string of letters and gradually
+// evolution, by starting with a random string of characters and gradually
 // "evolving" them into the text "methinks it is like a weasel".
 //
 // The program can be easily modified to generate text that satisfies other
