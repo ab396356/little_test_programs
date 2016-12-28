@@ -28,11 +28,11 @@ void user_func()
 {
     type_obj_cls<T> obj;
 
-    //obj.type_fail_func<double>(); // compilation error
+    //obj.type_fail_func<double>(); // compilation error: `<` parsed as operator
     obj.template type_fail_func<double>();
 
     obj.type_ok_func("hello?");
-    //obj.template type_ok_func("hello?"); // unnecessary
+    //obj.template type_ok_func("hello?"); // OK but unnecessary
 }
 
 } // unnamed namespace
