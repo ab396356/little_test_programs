@@ -7,7 +7,7 @@
 // Pretty Sine uses the trigonometric function sine to generate said image,
 // hence its name. (Don't ask me what the colors mean; I don't know.)
 //
-// Feel free to change the color formula (line 227) and create more prettiness!
+// Feel free to change the color formula (line 229) and create more prettiness!
 //
 
 #include <limits.h>
