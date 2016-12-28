@@ -10,13 +10,13 @@
 // Feel free to change the color formula (line 227) and create more prettiness!
 //
 
+#include <limits.h>
+#include <math.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
-#include <math.h>
 
 ///
 /// @brief Default values for image width and height, in pixels, in case
@@ -148,7 +148,7 @@ int main(int argc, char *argv[])
     // this should never happen, unless the help printing code above is changed
     if (usr_filename == NULL)
     {
-        fputs("error: no output filename was given", stderr);
+        fputs("error: no output filename was given\n", stderr);
         return EXIT_FAILURE;
     }
 
@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
             bmp_info.height = width;
         }
         else
-            fputs("warning: bad value for width", stderr);
+            fputs("warning: bad value for width\n", stderr);
     }
 
     if (usr_height != NULL)
@@ -172,7 +172,7 @@ int main(int argc, char *argv[])
         if (height != 0 && height <= UINT32_MAX)
             bmp_info.height = height;
         else
-            fputs("warning: bad value for height", stderr);
+            fputs("warning: bad value for height\n", stderr);
     }
 
     // attempt to allocate memory for the image's pixel data
@@ -185,7 +185,8 @@ int main(int argc, char *argv[])
 
     if (bmp_pixels == NULL)
     {
-        fputs("error: malloc(): could not allocate memory for Bitmap", stderr);
+        fputs("error: malloc(): could not allocate memory for Bitmap\n",
+            stderr);
         return EXIT_FAILURE;
     }
 
@@ -235,7 +236,7 @@ int main(int argc, char *argv[])
 
     if (fwrite(&bmp_file, sizeof bmp_file, 1, output_file) != 1)
     {
-        fputs("error: fwrite(): could not write Bitmap file header", stderr);
+        fputs("error: fwrite(): could not write Bitmap file header\n", stderr);
         fclose(output_file);
         free(bmp_pixels);
         return EXIT_FAILURE;
@@ -243,7 +244,7 @@ int main(int argc, char *argv[])
 
     if (fwrite(&bmp_info, sizeof bmp_info, 1, output_file) != 1)
     {
-        fputs("error: fwrite(): could not write Bitmap info header", stderr);
+        fputs("error: fwrite(): could not write Bitmap info header\n", stderr);
         fclose(output_file);
         free(bmp_pixels);
         return EXIT_FAILURE;
@@ -252,7 +253,7 @@ int main(int argc, char *argv[])
     if (fwrite(bmp_pixels, sizeof bmp_pixels[0], bmp_img_bytes, output_file) !=
         bmp_img_bytes)
     {
-        fputs("error: fwrite(): could not write Bitmap pixel data", stderr);
+        fputs("error: fwrite(): could not write Bitmap pixel data\n", stderr);
         fclose(output_file);
         free(bmp_pixels);
         return EXIT_FAILURE;
