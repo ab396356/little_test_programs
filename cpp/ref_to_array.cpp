@@ -31,11 +31,11 @@ int main()
 
     int (&ra)[100]          = a;
     const int (&cra)[100]   = a;
-    //int (&ra2)[55]        = a; // compilation error
+    //int (&ra2)[55]        = a; // compilation error: different types
     int (&ra2)[55]          = get_array_ref();
 
     ra[0] = 234;
-    //cra[0] = 234; // compilation error
+    //cra[0] = 234; // compilation error: assign to const
 
     std::cout << "before calling `pass_array_ref()`:\n";
     std::cout << "a[0]      == " << a[0] << '\n';
@@ -44,8 +44,8 @@ int main()
 
     pass_array_ref(a);
     //pass_array_ref(ra);   // OK but unnecessary
-    //pass_array_ref(cra);  // compilation error
-    //pass_array_ref(ra2);  // compilation error
+    //pass_array_ref(cra);  // compilation error: assign to const
+    //pass_array_ref(ra2);  // compilation error: different types
 
     std::cout << "after calling `pass_array_ref()`:\n";
     std::cout << "a[0]      == " << a[0] << '\n';
