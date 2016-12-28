@@ -5,6 +5,11 @@
 //  http://www.drdobbs.com/the-new-c-x-macros/184401387
 //  http://www.drdobbs.com/cpp/the-x-macro/228700289
 //
+// X macros are a metaprogramming technique used to generate repetitive code
+// that would otherwise be boring to write and maintain by hand. Consider how
+// easy it is, in the example below, to add or remove colors and their numbers
+// and then have the correct code expanded without further oversight.
+//
 
 #include <stdio.h>
 
