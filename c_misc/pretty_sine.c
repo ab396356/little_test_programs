@@ -1,13 +1,13 @@
 //
 // Pretty Sine program, written in C99.
 //
-// This little program generates a pretty Bitmap .BMP file that you can use as
-// a background image.
+// This little program generates a Bitmap .BMP file that is pretty enough to
+// be used as a background image, in my opinion.
 //
 // Pretty Sine uses the trigonometric function Sine to generate said image,
 // hence its name. (Don't ask me what the colors mean: I don't know.)
 //
-// Feel free to change the color formula (line 234) and create new prettiness!
+// Feel free to change the color formula (line 228) and create new prettiness!
 //
 
 #include <assert.h>
@@ -142,17 +142,11 @@ int main(int argc, char *argv[])
     const char *usr_width       = NULL;
     const char *usr_height      = NULL;
 
-    if (argc >= 2)
-        usr_filename = argv[1];
+    if (argc >= 2) usr_filename = argv[1];
+    if (argc >= 3) usr_width    = argv[2];
+    if (argc >= 4) usr_height   = argv[3];
 
-    if (argc >= 3)
-        usr_width = argv[2];
-
-    if (argc >= 4)
-        usr_height = argv[3];
-
-    // this should never happen, unless the help printing code above is changed
-    if (usr_filename == NULL)
+    if (usr_filename == NULL) // this should never happen
     {
         fputs("error: no output filename was given\n", stderr);
         return EXIT_FAILURE;
