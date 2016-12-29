@@ -1,15 +1,16 @@
 //
 // Pretty Sine program, written in C99.
 //
-// This little program generate a pretty Bitmap .BMP file that you can use as
+// This little program generates a pretty Bitmap .BMP file that you can use as
 // a background image.
 //
-// Pretty Sine uses the trigonometric function sine to generate said image,
-// hence its name. (Don't ask me what the colors mean; I don't know.)
+// Pretty Sine uses the trigonometric function Sine to generate said image,
+// hence its name. (Don't ask me what the colors mean: I don't know.)
 //
-// Feel free to change the color formula (line 229) and create more prettiness!
+// Feel free to change the color formula (line 234) and create new prettiness!
 //
 
+#include <assert.h>
 #include <limits.h>
 #include <math.h>
 #include <stddef.h>
@@ -39,13 +40,16 @@ static void print_help(void)
 }
 
 ///
-/// @brief Converts given floating point number to a color byte.
+/// @brief Converts a floating point number to a color byte.
+/// @details Maps the interval `[-1.0, 1.0]` to `[0, 255]`.
+/// @note Define the `NDEBUG` macro for release builds to disable `assert()`.
 /// @pre -1.0 <= `d` <= 1.0
 /// @param [in] d                   Floating point number to be converted.
 /// @returns Corresponding byte code as needed in RGB encoding.
 ///
 static uint8_t get_color(double d)
 {
+    assert((d >= -1.0) && (d <= 1.0));
     return (d + 1.0) / 2.0 * 255.0;
 }
 
@@ -53,32 +57,34 @@ static uint8_t get_color(double d)
 
 ///
 /// @brief Bitmap file header.
+/// @warning Assumming a "byte" is an octet.
 ///
 typedef struct
 {
-    uint8_t     magic[2];           ///< Magic field: set "BM".
-    uint32_t    size;               ///< Size of the .BMP file in bytes.
-    uint16_t    res0;               ///< First reserved value: set "0".
-    uint16_t    res1;               ///< Second reserved value: set "0".
-    uint32_t    offset;             ///< Offset of the pixel array.
+    uint8_t     magic[2];   ///< Magic field, set `"BM"`.
+    uint32_t    fsize;      ///< Size of the .BMP file, measured in bytes.
+    uint16_t    res0;       ///< First reserved value, set `0`.
+    uint16_t    res1;       ///< Second reserved value, set `0`.
+    uint32_t    offset;     ///< Offset of the pixel array.
 } bitmap_file_t;
 
 ///
 /// @brief Bitmap information header.
+/// @warning Assumming a "byte" is an octet.
 ///
 typedef struct
 {
-    uint32_t    size;               ///< Size of this header.
-    uint32_t    width;              ///< Bitmap width in pixels.
-    uint32_t    height;             ///< Bitmap height in pixels.
-    uint16_t    ncp;                ///< Number of color planes, "must be 1".
-    uint16_t    bpp;                ///< Bits per pixel: set "24".
-    uint32_t    comp;               ///< Compression method: set "0".
-    uint32_t    isize;              ///< Image size: set "0".
-    uint32_t    ppmx;               ///< Pixels per meter width: set "0".
-    uint32_t    ppmy;               ///< Pixels per meter height: set "0".
-    uint32_t    ncpal;              ///< Number of colors in palette: set "0".
-    uint32_t    nicol;              ///< Number of important colors: set "0".
+    uint32_t    hsize;      ///< Size of this header.
+    uint32_t    width;      ///< Bitmap width in pixels.
+    uint32_t    height;     ///< Bitmap height in pixels.
+    uint16_t    ncp;        ///< Number of color planes, "must be `1`".
+    uint16_t    bpp;        ///< Bits per pixel, set `24`.
+    uint32_t    comp;       ///< Compression method, set `0`.
+    uint32_t    isize;      ///< Size of image, set `0`.
+    uint32_t    ppmx;       ///< Pixels per meter width, set `0`.
+    uint32_t    ppmy;       ///< Pixels per meter height, set `0`.
+    uint32_t    ncpal;      ///< Number of colors in palette, set `0`.
+    uint32_t    nicol;      ///< Number of important colors, set `0`.
 } bitmap_info_t;
 
 #pragma pack()
@@ -94,7 +100,7 @@ typedef struct
 int main(int argc, char *argv[])
 {
     //
-    // intent: print help if there is at most 1 or more than 4 arguments, or
+    // print help if there is at most 1 or more than 4 arguments, or
     // if there are exactly 2 arguments and the second one is
     // either "-h" or "--help"
     //
@@ -110,14 +116,14 @@ int main(int argc, char *argv[])
 
     bitmap_file_t bmp_file = {
         .magic      = {'B', 'M'},
-        //.size     = 0, // to be determined
+        //.fsize    = 0, // to be determined
         .res0       = 0,
         .res1       = 0,
         .offset     = sizeof (bitmap_file_t) + sizeof (bitmap_info_t)
     };
 
     bitmap_info_t bmp_info = {
-        .size       = sizeof (bitmap_info_t),
+        .hsize      = sizeof (bitmap_info_t),
         .width      = DEFAULT_WIDTH,
         .height     = DEFAULT_HEIGHT,
         .ncp        = 1,
@@ -202,15 +208,15 @@ int main(int argc, char *argv[])
     }
 
     // finish preparing the Bitmap file and information (DIB) headers
-    bmp_file.size = sizeof (bmp_file) + sizeof (bmp_info) + bmp_img_bytes;
+    bmp_file.fsize = sizeof (bmp_file) + sizeof (bmp_info) + bmp_img_bytes;
 
     // calculate Bitmap pixels
 
-    for (size_t x=0; x < bmp_info.height; ++x)
+    for (size_t y=0; y < bmp_info.height; ++y)
     {
-        for (size_t y=0; y < bmp_info.width; ++y)
+        for (size_t x=0; x < bmp_info.width; ++x)
         {
-#define xy_offset   ((x * bmp_info.width + y) * bmp_info.bpp / CHAR_BIT)
+#define xy_offset   ((y * bmp_info.width + x) * bmp_info.bpp / CHAR_BIT)
             uint8_t * const red     = bmp_pixels + xy_offset + 0;
             uint8_t * const green   = bmp_pixels + xy_offset + 1;
             uint8_t * const blue    = bmp_pixels + xy_offset + 2;
@@ -219,11 +225,11 @@ int main(int argc, char *argv[])
             const double pi     = acos(-1.0);
             const double tau    = 2.0 * pi;
 
-            const double xr     = (double)x / bmp_info.height;  // X Ratio
-            const double yr     = (double)y / bmp_info.width;   // Y Ratio
+            const double xr     = (double)x / bmp_info.width;   // X Ratio
+            const double yr     = (double)y / bmp_info.height;  // Y Ratio
             // XY (Diagonal) Ratio
             const double xyr    = (double)(x + y) /
-                (bmp_info.height + bmp_info.width);
+                (bmp_info.width + bmp_info.height);
 
             // mysterious magic of forgotten high school math, go!
             *red    = get_color(sin(pi * xr));
