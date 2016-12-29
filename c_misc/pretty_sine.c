@@ -75,14 +75,14 @@ typedef struct
 typedef struct
 {
     uint32_t    hsize;      ///< Size of this header.
-    uint32_t    width;      ///< Bitmap width in pixels.
-    uint32_t    height;     ///< Bitmap height in pixels.
+    int32_t     width;      ///< Bitmap width in pixels.
+    int32_t     height;     ///< Bitmap height in pixels.
     uint16_t    ncp;        ///< Number of color planes, "must be `1`".
     uint16_t    bpp;        ///< Bits per pixel, set `24`.
     uint32_t    comp;       ///< Compression method, set `0`.
     uint32_t    isize;      ///< Size of image, set `0`.
-    uint32_t    ppmx;       ///< Pixels per meter width, set `0`.
-    uint32_t    ppmy;       ///< Pixels per meter height, set `0`.
+    int32_t     ppmx;       ///< Pixels per meter width, set `0`.
+    int32_t     ppmy;       ///< Pixels per meter height, set `0`.
     uint32_t    ncpal;      ///< Number of colors in palette, set `0`.
     uint32_t    nicol;      ///< Number of important colors, set `0`.
 } bitmap_info_t;
@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
     {
         const unsigned long int width = strtoul(usr_width, NULL, 10);
 
-        if (width != 0 && width <= UINT32_MAX)
+        if (width != 0 && width <= INT32_MAX)
         {
             bmp_info.width  = width;
             bmp_info.height = width;
@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
     {
         const unsigned long int height = strtoul(usr_height, NULL, 10);
 
-        if (height != 0 && height <= UINT32_MAX)
+        if (height != 0 && height <= INT32_MAX)
             bmp_info.height = height;
         else
             fputs("warning: bad value for height\n", stderr);
@@ -212,9 +212,9 @@ int main(int argc, char *argv[])
 
     // calculate Bitmap pixels
 
-    for (size_t y=0; y < bmp_info.height; ++y)
+    for (size_t y=0; y < (size_t)bmp_info.height; ++y)
     {
-        for (size_t x=0; x < bmp_info.width; ++x)
+        for (size_t x=0; x < (size_t)bmp_info.width; ++x)
         {
 #define xy_offset   ((y * bmp_info.width + x) * bmp_info.bpp / CHAR_BIT)
             uint8_t * const red     = bmp_pixels + xy_offset + 0;
