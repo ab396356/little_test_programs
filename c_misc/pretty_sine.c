@@ -49,7 +49,7 @@ static void print_help(void)
 ///
 static uint8_t get_color(double d)
 {
-    assert((d >= -1.0) && (d <= 1.0));
+    assert(d >= -1.0 && d <= 1.0);
     return (d + 1.0) / 2.0 * 255.0;
 }
 
