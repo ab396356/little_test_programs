@@ -75,8 +75,8 @@ typedef struct
 typedef struct
 {
     uint32_t    hsize;      ///< Size of this header.
-    int32_t     width;      ///< Bitmap width in pixels.
-    int32_t     height;     ///< Bitmap height in pixels.
+    int32_t     width;      ///< Bitmap width, measured in pixels.
+    int32_t     height;     ///< Bitmap height, measured in pixels.
     uint16_t    ncp;        ///< Number of color planes, "must be `1`".
     uint16_t    bpp;        ///< Bits per pixel, set `24`.
     uint32_t    comp;       ///< Compression method, set `0`.
