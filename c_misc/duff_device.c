@@ -8,7 +8,7 @@
 //
 // "Duff's device" is a construct that combines `switch` and a loop to perform
 // manual loop unrolling. It was discovered by Tom Duff in 1983 and was used to
-// improve the performance of his real-time animation program.
+// improve the speed of his real-time animation program.
 //
 // Nowadays (2016), modern C compilers can perform loop unrolling automatically
 // as an optimization option, rendering Duff's device an obsolete curiosity.
@@ -25,7 +25,7 @@
 static void print_numbers(unsigned long int n)
 {
     //
-    // Duff's device is made possible by two language features, mainly (2):
+    // Duff's device is made possible by two language features:
     //
     //  (1) the actual syntax of the `switch()` statement is:
     //
@@ -63,7 +63,7 @@ static void print_numbers(unsigned long int n)
 
     unsigned long int i=0;
 
-    switch (((n -= i) + 1) % 4)
+    switch ((n + 1) % 4)
     {
         case 0:     do {    printf("%4lu ",     i++);
         case 3:             printf("%4lu ",     i++);
