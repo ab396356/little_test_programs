@@ -71,6 +71,24 @@ static void print_numbers(unsigned long int n)
         case 1:             printf("%4lu\n",    i++);
                     } while (i < n);
     }
+
+    //
+    // same as the less fancy-looking:
+    //
+
+//
+//  switch ((n + 1) % 4)
+//  {
+//      do
+//      {
+//          case 0: printf("%4lu ",     i++);
+//          case 3: printf("%4lu ",     i++);
+//          case 2: printf("%4lu ",     i++);
+//          case 1: printf("%4lu\n",    i++);
+//      }
+//      while (i < n);
+//  }
+//
 }
 
 int main(void)
