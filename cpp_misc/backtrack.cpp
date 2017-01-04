@@ -15,9 +15,6 @@
 // speeding up the search process; the algorithm will skip generating candidates
 // which are known to not satisfy the constraints.
 //
-// The constraints should also "slip" into the candidate child generation
-// functions to increase the likelihood of generating a solution candidate.
-//
 // In contrast, a brute search algorithm will generate all possible candidates.
 // (A backtracking algorithm which never rejects any candidates becomes a brute
 // force algorithm.)
