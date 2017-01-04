@@ -3,6 +3,6 @@ The goal of this project is to explore the dark corners of C and C++, and maybe 
 
 * Each source file is meant to be a self-sufficient little test program, independent from all others.
 
-* Each source file starts with a comment with the name of the language feature, language standard that introduced it, and relevant documentation links.
+* Each source file starts with a comment with the name of the language feature, language standard that introduced it, relevant documentation links and possibly an in-depth description.
 
-Unless noted otherwise, all source files require the latest versions of toolchains, supporting the latest language standard.
+Unless noted otherwise, all source files require the latest versions of toolchains, supporting the latest language standard (C++11 and C99, at least).
