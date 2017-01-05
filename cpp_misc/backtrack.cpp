@@ -136,7 +136,7 @@
 // following example constraints:
 //
 //  (1) only lowercase latin letters (a-z) and decimal digits (0-9) are allowed
-//  (2) there can be at least two digits in a password
+//  (2) there must be at least two digits in a password
 //  (3) there must be at least one letter 'b' in a password
 //  (4) the minimum length of a password is 3
 //  (5) the maximum length of a password is 5
