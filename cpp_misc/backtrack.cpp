@@ -294,7 +294,7 @@ try
 
     static std::string child;
 
-    if (c.length() == 5)
+    if (c.length() >= 5)
         return nullptr;
 
     child = c + valid_chars.front();
