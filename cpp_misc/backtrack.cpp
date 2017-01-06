@@ -179,8 +179,8 @@ try
 {
     for (char ch: c)
     {
-        if (!std::islower(ch, std::locale()) &&
-            !std::isdigit(ch, std::locale()))
+        if (!std::islower(ch, std::locale::classic()) &&
+            !std::isdigit(ch, std::locale::classic()))
         {
             return true;
         }
@@ -192,7 +192,7 @@ try
             std::count_if(c.begin(), c.end(),
                 [](const char &ch) -> bool
                 {
-                    return std::isdigit(ch, std::locale());
+                    return std::isdigit(ch, std::locale::classic());
                 }) < 2)
         {
             return true;
@@ -244,7 +244,7 @@ try
         std::count_if(c.begin(), c.end(),
             [](const char &ch) -> bool
             {
-                return std::isdigit(ch, std::locale());
+                return std::isdigit(ch, std::locale::classic());
             }) >= 2)
     {
         return true;
