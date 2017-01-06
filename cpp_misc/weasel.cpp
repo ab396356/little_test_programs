@@ -149,7 +149,7 @@ try
             {
                 c = rand_char(prng);
             }
-            while (!std::isprint(c, std::locale("C")));
+            while (!std::isprint(c, std::locale::classic()));
 
             return c;
         };
