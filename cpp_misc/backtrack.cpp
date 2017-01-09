@@ -6,6 +6,8 @@
 //  https://en.wikipedia.org/wiki/Recursion_(computer_science)
 //  https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
 //  https://en.wikipedia.org/wiki/Queue_(abstract_data_type)
+//  https://en.wikipedia.org/wiki/Depth-first_search
+//  https://en.wikipedia.org/wiki/Breadth-first_search
 //
 // "Backtracking" is a technique used to find a solution (e.g. a password) when
 // validity constraints are known (e.g. the password can contain at most three
@@ -92,9 +94,12 @@
 //      //  candidate   stack::top()            // returns the current top
 //      //  bool        stack::empty()          // returns if the stack is empty
 //      //
-//      // note that the container isn't strictly required to be a Stack;
-//      // for instance it could be a Queue but then the algorithm will need
-//      // to be fine-tuned accordingly to the way a Queue works
+//      // note that the container isn't technically required to be a Stack;
+//      // for instance it could be a Queue but then the algorithm will perform
+//      // a "Breadth-First Search" (BFS) which means it will accumulate a large
+//      // number of children (in our case 60+ million) and use a lot of memory
+//      // (1+ GB) compared to the Stack version, which will perform a
+//      // "Depth-First Search" (DFS) and use much less memory (~500 KB)
 //      //
 //      stack<candidate> stk;
 //
