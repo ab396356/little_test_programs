@@ -150,6 +150,7 @@
 //
 //  (a) traditional recursive backtrack:        backtrack_rec()
 //  (b) stack-based non-recursive backtrack:    backtrack_stk()
+//  (c) queue-based non-recursive backtrack:    backtrack_que()
 //
 
 #include <algorithm>
@@ -158,6 +159,7 @@
 #include <iostream>
 #include <locale>
 #include <new>
+#include <queue>
 #include <stack>
 #include <stdexcept>
 #include <string>
@@ -424,6 +426,53 @@ catch (...)
     throw;
 }
 
+///
+/// @brief Performs non-recursive backtracking, using a Queue.
+/// @warning This function is very memory intensive!
+/// @param [in] start               Beginning candidate, to start with.
+///
+void backtrack_que(const std::string &start)
+try
+{
+    std::queue<std::string> que;
+
+    que.push(start);
+
+    while (!que.empty())
+    {
+        if (reject(que.front()))
+        {
+            que.pop();
+            continue;
+        }
+
+        if (accept(que.front()))
+            std::cout << que.front() << '\n';
+
+        const std::string *p_child(first_child(que.front()));
+
+        que.pop();
+
+        if (p_child != nullptr)
+        {
+            que.push(*p_child);
+
+            const std::string *p_sibling(next_child(que.back()));
+
+            while (p_sibling != nullptr)
+            {
+                que.push(*p_sibling);
+                p_sibling = next_child(que.back());
+            }
+        }
+    }
+}
+catch (...)
+{
+    std::cerr << "unknown exception in `" << __func__ << '`' << std::endl;
+    throw;
+}
+
 } // unnamed namespace
 
 ///
@@ -435,8 +484,9 @@ catch (...)
 int main()
 try
 {
-//  backtrack_rec("");
-    backtrack_stk("");
+    backtrack_rec("");
+//  backtrack_stk("");
+//  backtrack_que(""); // WARN: uses lots of memory!
     return EXIT_SUCCESS;
 }
 catch (...)
