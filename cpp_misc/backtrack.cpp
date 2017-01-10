@@ -17,7 +17,7 @@
 // speeding up the search process; the algorithm will skip generating candidates
 // which are known to not satisfy the constraints.
 //
-// In contrast, a brute search algorithm will generate all possible candidates.
+// In contrast, a brute force algorithm will generate all possible candidates.
 // (A backtracking algorithm which never rejects any candidates becomes a brute
 // force algorithm.)
 //
