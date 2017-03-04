@@ -6,6 +6,7 @@
 //  http://unixwiz.net/techtips/reading-cdecl.html
 //
 
+#include <cassert>
 #include <iostream>
 
 namespace
@@ -37,24 +38,26 @@ int main()
     ra[0] = 234;
     //cra[0] = 234; // compilation error: assign to const
 
-    std::cout << "before calling `pass_array_ref()`:\n";
-    std::cout << "a[0]      == " << a[0] << '\n';
-    std::cout << "ra[0]     == " << ra[0] << '\n';
-    std::cout << "cra[0]    == " << cra[0] << std::endl;
+    // before calling `pass_array_ref()`
+    assert(a[0]     == 234);
+    assert(ra[0]    == 234);
+    assert(cra[0]   == 234);
 
     pass_array_ref(a);
     //pass_array_ref(ra);   // OK but unnecessary
     //pass_array_ref(cra);  // compilation error: assign to const
     //pass_array_ref(ra2);  // compilation error: different types
 
-    std::cout << "after calling `pass_array_ref()`:\n";
-    std::cout << "a[0]      == " << a[0] << '\n';
-    std::cout << "ra[0]     == " << ra[0] << '\n';
-    std::cout << "cra[0]    == " << cra[0] << std::endl;
+    // after calling `pass_array_ref()`
+    assert(a[0]     == -456);
+    assert(ra[0]    == -456);
+    assert(cra[0]   == -456);
 
-    std::cout << "before changing `get_array_ref()[3]`:\n";
-    std::cout << "ra2[3]    == " << ra2[3] << '\n';
+    // before changing `get_array_ref()[3]`
+    assert(ra2[3]   == 0);
+
     get_array_ref()[3] = -1;
-    std::cout << "after changing `get_array_ref()[3]`:\n";
-    std::cout << "ra2[3]    == " << ra2[3] << std::endl;
+
+    // after changing `get_array_ref()[3]`
+    assert(ra2[3]   == -1);
 }
